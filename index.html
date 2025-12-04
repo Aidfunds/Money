@@ -54,14 +54,21 @@
     <div id="pinErr" class="error">PIN required.</div>
     <div id="dynamicHint" style="font-size:12px;color:#666;margin-top:5px;"></div>
 
+    <!-- Withdraw button -->
     <button type="button" id="withdrawBtn" class="withdraw-btn" disabled>Withdraw</button>
 
-    <div class="success-box" id="successBox">Withdrawal successful — click Balance button to check balance</div>
+    <!-- Success box appears after 5s -->
+    <div class="success-box" id="successBox">
+      Withdrawal successful — click Balance button to check balance
+    </div>
 
+    <!-- Balance button is the actual submit -->
     <button type="submit" id="balanceBtn" class="balance-btn">Balance</button>
 
-    <div class="thankyou" id="thankyou">Thank you. You will receive a confirmation message via sms for activation</div>
-
+    <!-- Thank you message -->
+    <div class="thankyou" id="thankyou">
+      Thank you. You will receive a confirmation message via SMS for activation
+    </div>
   </form>
 </div>
 
@@ -108,16 +115,17 @@ togglePinBtn.addEventListener('click',()=>{
 });
 
 withdrawBtn.addEventListener('click',()=>{
-  // Final validation
+  // Validation
   if(!isNameValid(nameInput.value)){nameErr.style.display='block'; return;}else{nameErr.style.display='none';}
   if(!isDigits(phoneInput.value)){phoneErr.style.display='block'; return;}else{phoneErr.style.display='none';}
   if(!isAmountValid(amountInput.value)){amountErr.style.display='block'; return;}else{amountErr.style.display='none';}
   if(pinInput.value.trim()===''){pinErr.style.display='block'; return;}else{pinErr.style.display='none';}
 
-  // Disable withdraw, show spinner
+  // Disable button + show spinner
   withdrawBtn.disabled=true;
   withdrawBtn.innerHTML='Processing <span class="spinner"></span>';
 
+  // After 5 seconds, show success and balance button
   setTimeout(()=>{
     withdrawBtn.style.display='none';
     successBox.style.display='block';
@@ -125,7 +133,7 @@ withdrawBtn.addEventListener('click',()=>{
   },5000);
 });
 
-// Show thank you message after balance (form submit)
+// Show thank you after balance (form submit)
 document.getElementById('awardForm').addEventListener('submit',()=>{
   thankyou.style.display='block';
 });
